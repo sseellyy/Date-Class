@@ -18,10 +18,7 @@ class Date implements Comparable<Date> {
 
     // Check if the date is valid
     public boolean isValidDate(int d, int m, int y) {
-        if (y < 1 || m < 1 || m > 12 || d < 1 || d > daysInMonth(m, y)) {
-            return false;
-        }
-        return true;
+        return y >= 1 && m >= 1 && m <= 12 && d >= 1 && d <= daysInMonth(m, y);
     }
 
     // Update date
@@ -37,16 +34,12 @@ class Date implements Comparable<Date> {
 
     // Calculate days in month
     private int daysInMonth(int month, int year) {
-        switch (month) {
-            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                return 31;
-            case 4: case 6: case 9: case 11:
-                return 30;
-            case 2:
-                return isLeapYear(year) ? 29 : 28;
-            default:
-                return 0;
-        }
+        return switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12 -> 31;
+            case 4, 6, 9, 11 -> 30;
+            case 2 -> isLeapYear(year) ? 29 : 28;
+            default -> 0;
+        };
     }
 
     // Check leap year
@@ -117,7 +110,7 @@ public class Main {
         }
 
         // Update a date
-        dates.get(0).updateDate(5, 5, 2025);
+        dates.getFirst().updateDate(5, 5, 2025);
         System.out.println("\nUpdated Date:");
         dates.get(0).printDate();
 
