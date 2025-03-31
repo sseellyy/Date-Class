@@ -26,3 +26,17 @@ public boolean isValidDate(int d, int m, int y) {
     int[] daysInMonth = {31, isLeapYear(y) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     return d <= daysInMonth[m - 1];
 }
+
+public static boolean isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+public void updateDate(int d, int m, int y) {
+    if (isValidDate(d, m, y)) {
+        this.day = d;
+        this.month = m;
+        this.year = y;
+    } else {
+        System.out.println("Invalid date!");
+    }
+}
