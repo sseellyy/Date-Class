@@ -1,97 +1,131 @@
 import java.util.*;
 
 class Date implements Comparable<Date> {
-    private int day, month, year;
+    private int day;
+    private int month;
+    private int year;
 
+    // Constructor
     public Date(int day, int month, int year) {
-        updateDate(day, month, year);
-    }
-
-    public boolean isValidDate(int day, int month, int year) {
-        int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (month < 1 || month > 12 || day < 1) return false;
-        if (month == 2 && isLeapYear(year)) return day <= 29;
-        return day <= daysInMonth[month - 1];
-    }
-
-    private boolean isLeapYear(int year) {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
-
-    public void updateDate(int day, int month, int year) {
         if (isValidDate(day, month, year)) {
             this.day = day;
             this.month = month;
             this.year = year;
         } else {
-            throw new IllegalArgumentException("Invalid date!");
+            System.out.println("Invalid date!");
         }
     }
 
-    public String getDayOfWeek() {
-        String[] days = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        int y = (month < 3) ? year - 1 : year;
-        int m = (month < 3) ? month + 12 : month;
-        int K = y % 100;
-        int J = y / 100;
-        int dayOfWeek = (day + (13 * (m + 1)) / 5 + K + (K / 4) + (J / 4) + (5 * J)) % 7;
-        return days[dayOfWeek];
+    // Check if the date is valid
+    public boolean isValidDate(int d, int m, int y) {
+        if (y < 1 || m < 1 || m > 12 || d < 1 || d > daysInMonth(m, y)) {
+            return false;
+        }
+        return true;
     }
 
-    public int calculateDifference(Date other) {
-        Calendar cal1 = new GregorianCalendar(year, month - 1, day);
-        Calendar cal2 = new GregorianCalendar(other.year, other.month - 1, other.day);
+    // Update date
+    public void updateDate(int d, int m, int y) {
+        if (isValidDate(d, m, y)) {
+            this.day = d;
+            this.month = m;
+            this.year = y;
+        } else {
+            System.out.println("Invalid date!");
+        }
+    }
+
+    // Calculate days in month
+    private int daysInMonth(int month, int year) {
+        switch (month) {
+            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                return 31;
+            case 4: case 6: case 9: case 11:
+                return 30;
+            case 2:
+                return isLeapYear(year) ? 29 : 28;
+            default:
+                return 0;
+        }
+    }
+
+    // Check leap year
+    private boolean isLeapYear(int year) {
+        return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    }
+
+    // Get the day of the week
+    public String getDayOfWeek() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, day);
+        String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        return days[cal.get(Calendar.DAY_OF_WEEK) - 1];
+    }
+
+    // Calculate difference in days
+    public int calculateDifference(Date otherDate) {
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+
+        cal1.set(year, month - 1, day);
+        cal2.set(otherDate.year, otherDate.month - 1, otherDate.day);
+
         long diffMillis = Math.abs(cal1.getTimeInMillis() - cal2.getTimeInMillis());
         return (int) (diffMillis / (1000 * 60 * 60 * 24));
     }
 
+    // Print the date
     public void printDate() {
-        String[] months = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-        System.out.println(months[month] + " " + day + ", " + year);
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        System.out.println(months[month - 1] + " " + day + ", " + year);
     }
 
+    // Compare method for sorting
+    @Override
     public int compareTo(Date other) {
-        if (this.year != other.year) return this.year - other.year;
-        if (this.month != other.month) return this.month - other.month;
+        if (this.year != other.year) {
+            return this.year - other.year;
+        }
+        if (this.month != other.month) {
+            return this.month - other.month;
+        }
         return this.day - other.day;
-    }
-
-    public String toString() {
-        return day + "/" + month + "/" + year;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        List<Date> dates = new ArrayList<>();
+        ArrayList<Date> dates = new ArrayList<>();
 
-        try {
-            dates.add(new Date(15, 3, 2023));
-            dates.add(new Date(29, 2, 2024));
-            dates.add(new Date(1, 1, 2020));
-            dates.add(new Date(31, 12, 2019));
-            dates.add(new Date(5, 7, 2022));
-            dates.add(new Date(18, 11, 2025));
-            dates.add(new Date(9, 9, 2021));
-            dates.add(new Date(23, 4, 2018));
-            dates.add(new Date(14, 6, 2017));
-            dates.add(new Date(30, 8, 2016));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        dates.add(new Date(1, 1, 2023));
+        dates.add(new Date(29, 2, 2020)); // Leap year date
+        dates.add(new Date(15, 3, 2022));
+        dates.add(new Date(30, 4, 2021));
+        dates.add(new Date(25, 12, 2025));
+
+        System.out.println("Original Dates:");
+        for (Date date : dates) {
+            date.printDate();
         }
 
-        System.out.println("Dates before sorting:");
-        for (Date d : dates) d.printDate();
-
+        // Sort dates
         Collections.sort(dates);
 
-        System.out.println("\nDates after sorting:");
-        for (Date d : dates) d.printDate();
+        System.out.println("\nSorted Dates:");
+        for (Date date : dates) {
+            date.printDate();
+        }
 
-        Date d1 = new Date(1, 1, 2020);
-        Date d2 = new Date(31, 12, 2019);
-        System.out.println("\nDifference between " + d1.toString() + " and " + d2.toString() + " is " + d1.calculateDifference(d2) + " days.");
+        // Update a date
+        dates.get(0).updateDate(5, 5, 2025);
+        System.out.println("\nUpdated Date:");
+        dates.get(0).printDate();
 
-        System.out.println("\nThe day of the week for " + d1.toString() + " is " + d1.getDayOfWeek());
+        // Get the day of the week
+        System.out.println("\nDay of the Week for " + dates.get(0).getDayOfWeek());
+
+        // Calculate difference between two dates
+        int diff = dates.get(0).calculateDifference(dates.get(1));
+        System.out.println("\nDifference in days: " + diff);
     }
 }
