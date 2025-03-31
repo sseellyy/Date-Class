@@ -47,13 +47,17 @@ class Date implements Comparable<Date> {
         return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
     }
 
-    // Get the day of the week
     public String getDayOfWeek() {
         Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day);
+        cal.set(year, month - 1, day); // Convert month from 1-12 to 0-11
+
+        int dayIndex = cal.get(Calendar.DAY_OF_WEEK);
         String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        return days[cal.get(Calendar.DAY_OF_WEEK) - 1];
+        return days[dayIndex - 1]; // Adjust index for array
     }
+
+
+
 
     // Calculate difference in days
     public int calculateDifference(Date otherDate) {
