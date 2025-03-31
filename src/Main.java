@@ -20,3 +20,9 @@ abstract class Date implements Comparable<Date> {
         return false;
     }
 }
+
+public boolean isValidDate(int d, int m, int y) {
+    if (m < 1 || m > 12 || d < 1) return false;
+    int[] daysInMonth = {31, isLeapYear(y) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    return d <= daysInMonth[m - 1];
+}
