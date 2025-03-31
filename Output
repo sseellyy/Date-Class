@@ -1,0 +1,30 @@
+"C:\Program Files\Java\jdk-23\bin\java.exe" "-javaagent:C:\Users\abiro\AppData\Local\Programs\IntelliJ IDEA Community Edition\lib\idea_rt.jar=51155" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath "C:\Users\abiro\IdeaProjects\Date Class\out\production\Date Class" Main
+Dates before sorting:
+March 15, 2023
+February 29, 2024
+January 1, 2020
+December 31, 2019
+July 5, 2022
+November 18, 2025
+September 9, 2021
+April 23, 2018
+June 14, 2017
+August 30, 2016
+
+Dates after sorting:
+August 30, 2016
+June 14, 2017
+April 23, 2018
+December 31, 2019
+January 1, 2020
+September 9, 2021
+July 5, 2022
+March 15, 2023
+February 29, 2024
+November 18, 2025
+
+Difference between 1/1/2020 and 31/12/2019 is 1 days.
+
+The day of the week for 1/1/2020 is Wednesday
+
+Process finished with exit code 0
