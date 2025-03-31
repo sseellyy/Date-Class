@@ -57,4 +57,45 @@ abstract class Date implements Comparable<Date> {
         System.out.println(MONTHS[month - 1] + " " + day + ", " + year);
     }
 }
+@Override
+public int compareTo(Date other) {
+    if (this.year != other.year)
+        return Integer.compare(this.year, other.year);
+    if (this.month != other.month)
+        return Integer.compare(this.month, other.month);
+    return Integer.compare(this.day, other.day);
+}
+}
 
+public class Main {
+    public static void main(String[] args) {
+        List<Date> dates = new ArrayList<>();
+
+        try {
+            dates.add(new Date(15, 3, 2023));
+            dates.add(new Date(1, 1, 2022));
+            dates.add(new Date(29, 2, 2024)); // Leap year case
+            dates.add(new Date(10, 7, 2025));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Before Sorting:");
+        for (Date d : dates) d.printDate();
+
+        Collections.sort(dates);
+
+        System.out.println("\nAfter Sorting:");
+        for (Date d : dates) d.printDate();
+
+        // Demonstrate date difference
+        Date d1 = new Date(1, 1, 2022);
+        Date d2 = new Date(15, 3, 2023);
+        System.out.println("\nDifference between dates: " + d1.calculateDifference(d2) + " days");
+
+        // Print the day of the week
+        System.out.println("\nThe day of the week for ");
+        d2.printDate();
+        System.out.println(" is " + d2.getDayOfWeek());
+    }
+}
