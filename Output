@@ -1,30 +1,23 @@
-"C:\Program Files\Java\jdk-23\bin\java.exe" "-javaagent:C:\Users\abiro\AppData\Local\Programs\IntelliJ IDEA Community Edition\lib\idea_rt.jar=51155" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath "C:\Users\abiro\IdeaProjects\Date Class\out\production\Date Class" Main
-Dates before sorting:
-March 15, 2023
-February 29, 2024
-January 1, 2020
-December 31, 2019
-July 5, 2022
-November 18, 2025
-September 9, 2021
-April 23, 2018
-June 14, 2017
-August 30, 2016
+"C:\Program Files\Java\jdk-23\bin\java.exe" "-javaagent:C:\Users\abiro\AppData\Local\Programs\IntelliJ IDEA Community Edition\lib\idea_rt.jar=51817" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath "C:\Users\abiro\IdeaProjects\Date Class\out\production\Date Class" Main
+Original Dates:
+January 1, 2023
+February 29, 2020
+March 15, 2022
+April 30, 2021
+December 25, 2025
 
-Dates after sorting:
-August 30, 2016
-June 14, 2017
-April 23, 2018
-December 31, 2019
-January 1, 2020
-September 9, 2021
-July 5, 2022
-March 15, 2023
-February 29, 2024
-November 18, 2025
+Sorted Dates:
+February 29, 2020
+April 30, 2021
+March 15, 2022
+January 1, 2023
+December 25, 2025
 
-Difference between 1/1/2020 and 31/12/2019 is 1 days.
+Updated Date:
+May 5, 2025
 
-The day of the week for 1/1/2020 is Wednesday
+Day of the Week for Monday
+
+Difference in days: 1466
 
 Process finished with exit code 0
